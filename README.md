@@ -1,4 +1,4 @@
-# UKB_DCM_dem
+# UKB_DCM_dementia
 This repository provides all the code that was used for our project of fitting spectral dynamic causal models (DCM) to dementia cases' and matched controls' resting-state fMRI (rs-fMRI) data from the UK biobank.
 
 You can use this repository to reproduce the results and figures from our original analysis.
