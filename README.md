@@ -21,6 +21,8 @@ Specifically, the BMA (bayesian model average) results which summarise the group
 
 There are also files which include the results of K-fold cross-validated logistic regression to predict dementia incidence from effective connectivity, functional connectivity and volumetric data respectively (EC_classifier_Kfold.mat, FunctConx_classifier_Kfold.mat, volumetric_classifier_Kfold.mat), and files which include the results of K-fold cross-validated linear regression to predict time until dementia diagnosis from effective, connectivity, functional connectivity and volumetric data respectively (EC_prognosticator_Kfold.mat, FunctConx_prognosticator_Kfold.mat, volumetric_prognosticator_Kfold.mat).
 
+There are also two files called LOOCV_EC_classifier_weighted_PreClinOnly_1.mat and LOOCV_EC_classifier_weighted_PreClinOnly_0.mat. These are the outputs of leave-one-out cross-validated logistic regression models trained on effective connectivity to predict dementia incidence. The first file (appended preclin_1) excludes cases with prevalent dementia at the time of data acquisition. The second file (appended preclin_0) includes all subjects. These files are used to derive the effective connectivity (EC) index, which is a subject-specific variable describing how "dementia-like" an individual's DMN effective connectivity pattern is. It is simply the P(dementia) outputted by the cross-validated regression model. This subject-specific variable is used for the modifiable risk factors analysis.
+
 ## Assumptions on data structure
 The code makes some assumptions about how your MRI data files are organised. 
 
