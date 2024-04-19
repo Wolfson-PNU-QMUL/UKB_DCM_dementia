@@ -148,8 +148,7 @@ PlotConnectMatrix(X, ROIs)
 ```
 The connectivity matrix will look something like this:
 
-![ConnectivityMatrixExample](https://github.com/Wolfson-PNU-QMUL/UKB_DCM_dem/assets/142310228/592fc1e9-c8ea-42e5-abbd-0bdcc6fa853e)
-
+![ConnectivityMatrixExample](https://github.com/Wolfson-PNU-QMUL/UKB_DCM_dementia/assets/142310228/4fe250a9-9371-4349-8d1c-d395e8072eab)
 
 Connectivity matrices are clear and concise but not particularly anatomically intuitive. 
 
@@ -387,11 +386,12 @@ set(gca, 'FontSize', 14); set(gca, 'LineWidth', 3);
 
 Here's an example of some attenuated connections, viewed from angles 1 and 2 (as defined above):
 
-<img width="1012" alt="Attenuated connections" src="https://github.com/Wolfson-PNU-QMUL/UKB_DCM_dem/assets/142310228/0fadf07f-e917-4ef0-8911-03171b2a8cf7">
+<img width="1012" alt="AttenuatedConnectionsExample" src="https://github.com/Wolfson-PNU-QMUL/UKB_DCM_dementia/assets/142310228/0639c9a8-a097-41d9-8247-7fffc7d0d48c">
 
 
 And here's an example of some strengthened connections:
 
-<img width="1012" alt="Strengthened connections" src="https://github.com/Wolfson-PNU-QMUL/UKB_DCM_dem/assets/142310228/8f0f5844-6701-45e2-b645-cf2176d8a980">
+<img width="1012" alt="StrengthenedConnectionsExample" src="https://github.com/Wolfson-PNU-QMUL/UKB_DCM_dementia/assets/142310228/115ad5f7-5bb2-4148-ba39-1fda6f025900">
+
 
 
