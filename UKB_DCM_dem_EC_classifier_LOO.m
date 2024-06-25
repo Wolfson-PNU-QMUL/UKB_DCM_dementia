@@ -107,7 +107,7 @@ PEB = spm_dcm_peb(GCM,M,{'A'});
 BMA = spm_dcm_peb_bmc(PEB);
 
 dt = string(datetime, 'dd-MM-yy_hh:mm:ss');
-file = ['Classifier_DCM_BMA_PreClinOnly_' num2str(preclin_only) '_' dt{1} '.mat'];
+file = ['Classifier_DCM_BMA_LOO_' dt{1} '.mat'];
 
 fprintf('PEB/BMA complete. Saving files...')
 save(file,'BMA', 'PEB', 'GCM', 'GCM_sj_list','-v7.3')
