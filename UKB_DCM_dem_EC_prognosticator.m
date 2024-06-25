@@ -122,7 +122,7 @@ M.X      = X;
 M.Xnames = labels_vis;
 
 %fit PEB (2nd level DCM model with all connections)
-[PEB,RCM] = spm_dcm_peb(GCM,M,{'A'});
+PEB = spm_dcm_peb(GCM,M,{'A'});
 
 %Bayesian model reduction and average using automatic greedy search over parameters
 %Prunes connections
@@ -132,30 +132,30 @@ dt = string(datetime, 'dd-MM-yy_hh:mm:ss');
 file = ['Prognosticator_DCM_BMA_' dt{1} '.mat'];
 
 fprintf('PEB/BMA complete. Saving files...')
-save(file,'BMA', 'PEB', 'RCM','-v7.3')
+save(file,'BMA', 'PEB', 'GCM','-v7.3')
 
 
 %%%%%%%%%%%%% Now see if we can actually use the surviving connections from
 %%%%%%%%%%%%% the Bayesian model reduction to predict date of dementia
 %%%%%%%%%%%%% diagnosis using leave-one-out cross-validation
-clearvars -except BMA PEB RCM demos sj_inds
+clearvars -except BMA PEB GCM demos sj_inds
 clc
 close all
 fprintf('Attempting to predict date of diagnosis using effective connectivity...')
 
 %number of regions
-nR = length(RCM{1,1}.Y.name);
+nR = length(GCM{1,1}.Y.name);
 
 %Only use connections with very strong posterior evidence of being non-zero
 inds = find(BMA.Pp(((nR^2)+1) :(2*(nR^2))  )>0.99);
 [to,from] = ind2sub([nR nR],inds);
 
 Y = []; X = [];
-for isj = 1:length(RCM)
+for isj = 1:length(GCM)
     for j = 1:length(to)
 
         %Data features (DCM parameters)
-        X(isj, j) = RCM{isj}.Ep.A(to(j), from(j));
+        X(isj, j) = GCM{isj}.Ep.A(to(j), from(j));
 
         %Response variable to predict (time until diagnosis)
         Y(isj,1) =  str2double(cell2mat(table2cell(demos(sj_inds(isj), 'ML_C42C240Xf41270f20002_DementiaAge')))) - cell2mat(table2cell(demos(sj_inds(isj),'R_Age_f21003_2')));
