@@ -159,7 +159,7 @@ save(file,'BMA', 'PEB', 'GCM', 'GCM_sj_list','-v7.3')
 %%%%%%%%%%%%% Now see if we can actually use the surviving connections from
 %%%%%%%%%%%%% the Bayesian model reduction to predict dementia status using
 %%%%%%%%%%%%% K-fold cross-validation
-clearvars -except BMA PEB GCM
+clearvars -except BMA PEB GCM GCM_sj_list
 clc
 close all
 fprintf('Attempting to predict dementia status using effective connectivity...')
@@ -184,7 +184,7 @@ for isj = 1:length(GCM)
 end
 
 %Fit cross-validated predictive model (elastic-net logistic regression)
-[metrics] = UKB_DCM_dem_general_classifier(X,Y,K,k);
+[metrics] = UKB_DCM_dem_general_classifier(X,Y,K,k, GCM_sj_list);
 
 dt = string(datetime, 'dd-MM-yy_hh:mm:ss');
 save(['EC_classifier_' dt{1} '.mat'], 'metrics')
