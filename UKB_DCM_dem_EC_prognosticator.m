@@ -138,7 +138,7 @@ save(file,'BMA', 'PEB', 'GCM','-v7.3')
 %%%%%%%%%%%%% Now see if we can actually use the surviving connections from
 %%%%%%%%%%%%% the Bayesian model reduction to predict date of dementia
 %%%%%%%%%%%%% diagnosis using leave-one-out cross-validation
-clearvars -except BMA PEB GCM demos sj_inds
+clearvars -except BMA PEB GCM demos sj_inds K k
 clc
 close all
 fprintf('Attempting to predict date of diagnosis using effective connectivity...')
