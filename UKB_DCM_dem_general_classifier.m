@@ -1,7 +1,7 @@
 % Code written by Sam Ereira (s.ereira@qmul.ac.uk) - last updated 2/3/24
 % Fits an elastic-net logistic regression model with K-fold cross-validation.
 
-function [metrics] = UKB_DCM_dem_general_classifier(X_full,Y_full,K,k)
+function [metrics] = UKB_DCM_dem_general_classifier(X_full,Y_full,K,k, GCM_sj_list)
 
 
 metrics = [];
