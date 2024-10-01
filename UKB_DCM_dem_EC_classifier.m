@@ -78,7 +78,7 @@ for i = 1:length(subjects)
         %case (1) or control (0) or prevalent (2)
         GCM_sj_list(j,2) = ~strcmp(demos.R_ML_DiagbySess_C42C240Xf41270f20002_Dementia_2(i), 'No');
         if strcmp(demos.R_ML_DiagbySess_C42C240Xf41270f20002_Dementia_2(i), 'Yes')==1
-            GCM_sj_list(j,2) = 2; %label for prevalent cases
+            _sj_list(j,2) = 2; %label for prevalent cases
         end
 
         %position in array for indexing later
@@ -143,7 +143,8 @@ M.X      = X;
 M.Xnames = labels_vis;
 
 %fit PEB (2nd level DCM model with all connections)
-PEB = spm_dcm_peb(GCM,M,{'A'});
+
+[PEB, RCM] = spm_dcm_peb(GCM,M,{'A'}); %RCM is an array of 'reduced' first-level DCMs, which have been constrained by group-level priors
 
 %Bayesian model reduction and average using automatic greedy search over parameters
 %Prunes connections
@@ -153,30 +154,36 @@ dt = string(datetime, 'dd-MM-yy_hh:mm:ss');
 file = ['Classifier_DCM_BMA_' dt{1} '.mat'];
 
 fprintf('PEB/BMA complete. Saving files...')
-save(file,'BMA', 'PEB', 'GCM', 'GCM_sj_list','-v7.3')
+save(file,'BMA', 'PEB', 'GCM', 'RCM' 'GCM_sj_list','-v7.3')
 
 
 %%%%%%%%%%%%% Now see if we can actually use the surviving connections from
 %%%%%%%%%%%%% the Bayesian model reduction to predict dementia status using
 %%%%%%%%%%%%% K-fold cross-validation
-clearvars -except BMA PEB GCM GCM_sj_list K k
+clearvars -except BMA PEB RCM GCM GCM_sj_list K k
 clc
 close all
 fprintf('Attempting to predict dementia status using effective connectivity...')
 
 %number of regions
-nR = length(GCM{1,1}.Y.name);
+nR = length(RCM{1,1}.Y.name);
 
 %Only use connections with very strong posterior evidence of being non-zero
 inds = find(BMA.Pp(((nR^2)+1) :(2*(nR^2))  )>0.99);
 [to,from] = ind2sub([nR nR],inds);
 
 Y = []; X = [];
-for isj = 1:length(GCM)
+for isj = 1:length(RCM)
     for j = 1:length(to)
 
         %Data features (DCM parameters)
-        X(isj, j) = GCM{isj}.Ep.A(to(j), from(j));
+        X(isj, j) = RCM{isj}.Ep.A(to(j), from(j));
+
+        %N.B. For future users
+        %This analysis makes use of RCM (parameters refined by group-level priors) which may bias subsequent results
+        %One alternative would have bene to exclude the primary covariate of interest (case vs. control) from the original PEB analysis
+        %However, the most appropriate analysis here is probably to use Bayesian LOO-CV within the PEB framework, rather than using 
+        %classical inference, outside of the PEB framework, as we have done here
 
         %Response variable to predict (case vs. control)
         Y(isj,1) = PEB.M.X(isj,2); 
