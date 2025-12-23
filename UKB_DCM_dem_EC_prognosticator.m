@@ -42,7 +42,7 @@ j = 0; %counter for converged DCMs
 for i = 1:length(subjects)
     converged = [];
     EID = subjects(i);
-    if EID == 1595913 %UNSURE OF DEMENTIA AGE SO EXCLUDE THIS SUBJECT
+    if EID == 0000000 %UNSURE OF DEMENTIA AGE SO EXCLUDE THIS SUBJECT - REDACTED ON 23/12/25 TO AVOID SHARING eID
         continue
     end
     funct_data_path = [fMRI_datadir num2str(EID) funct_ID];
