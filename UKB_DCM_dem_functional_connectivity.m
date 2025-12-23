@@ -64,9 +64,9 @@ for isj = 1:length(subjects)
     if ~strcmp(demos.R_ML_DiagbySess_C42C240Xf41270f20002_Dementia_2(find(sum(demos.EID == EID,2))), 'No')
         sjc = sjc+1;
 
-        if EID == 1595913 %%Exclude this subject as unsure when was diagnosed
-            continue
-        end
+       if EID == 0000000 %UNSURE OF DEMENTIA AGE SO EXCLUDE THIS SUBJECT - REDACTED ON 23/12/25 TO AVOID SHARING eID
+        continue
+    end
 
         funct_data_path = ['/data/Wolfson-PNU-dementia/UKB/Imaging_rsfMRI_UKB_DCM/rfMRI_CCDem_2/' num2str(EID) funct_ID];
         load([funct_data_path '/fMRI/Full_DCM/DCM_full_estim']);
