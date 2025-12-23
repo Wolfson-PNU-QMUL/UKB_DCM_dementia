@@ -32,8 +32,8 @@ save(['volumetric_classifier_' dt{1} '.mat'], 'metrics')
 %%%%% SECOND: FIT THE PROGNOSTICATOR TO VOLUMETRIC DATA %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%Exclude this subject as unsure when was diagnosed
-demos(find(demos.EID == 1595913),:) = [];
+%Exclude this subject as unsure when was diagnosed - edited on 23/12/25 to avoid sharing eID
+demos(find(demos.EID == 0000000),:) = [];
 
 %cases only
 inds = ~strcmp(demos.R_ML_DiagbySess_C42C240Xf41270f20002_Dementia_2,'No');
